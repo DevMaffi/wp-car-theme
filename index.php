@@ -166,41 +166,42 @@ get_header();
 
 <!-- FEATURES -->
 <section class="features section" data-blur-target>
-  <h2 class="section__title">More Features</h2>
+  <h2 class="section__title">
+    <?php the_field('features_title'); ?>
+  </h2>
 
   <!-- FEATURES CONTAINER -->
   <div class="features__container container grid">
     <div class="features__group">
-      <img class="features__img" src="<?= bloginfo('template_url'); ?>/assets/images/features.png" alt="features">
+      <img class="features__img" src="<?php the_field('features_img'); ?>" alt="features">
 
-      <!-- FEATURES CARD -->
-      <div class="features__card features__card-1">
-        <h3 class="features__card-title">800v</h3>
-        <p class="features__card-description">
-          Turbo
-          <br />
-          Charging
-        </p>
-      </div>
+      <?php
+      $posts = get_posts(array(
+        'numberposts' => 3,
+        'category_name' => 'features',
+        'order_by' => 'date',
+        'order' => 'ASC',
+        'post_type' => 'post',
+        'suppress_filters' => true,
+      ));
 
-      <!-- FEATURES CARD -->
-      <div class="features__card features__card-2">
-        <h3 class="features__card-title">350</h3>
-        <p class="features__card-description">
-          Km
-          <br />
-          Range
-        </p>
-      </div>
-      <!-- FEATURES CARD -->
-      <div class="features__card features__card-3">
-        <h3 class="features__card-title">480</h3>
-        <p class="features__card-description">
-          Km
-          <br />
-          Travel
-        </p>
-      </div>
+      foreach ($posts as $key => $post) {
+        setup_postdata($post);
+      ?>
+        <!-- FEATURES CARD -->
+        <div class="<?= 'features__card features__card-' . ($key + 1) ?>">
+          <h3 class="features__card-title">
+            <?php the_field('card_title'); ?>
+          </h3>
+          <p class="features__card-description">
+            <?php the_field('card_description'); ?>
+          </p>
+        </div>
+      <?php
+      }
+
+      wp_reset_postdata();
+      ?>
     </div>
   </div>
   <img class="features__map" src="<?= bloginfo('template_url'); ?>/assets/images/map.svg" alt="map">
