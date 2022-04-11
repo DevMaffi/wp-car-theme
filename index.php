@@ -221,85 +221,69 @@ get_header();
           <span>All</span>
         </button>
       </li>
-      <li>
-        <button class="featured__item" data-filter=".tesla">
-          <img src="<?= bloginfo('template_url'); ?>/assets/images/logo3.png" alt="logo">
-        </button>
-      </li>
-      <li>
-        <button class="featured__item" data-filter=".audi">
-          <img src="<?= bloginfo('template_url'); ?>/assets/images/logo2.png" alt="logo">
-        </button>
-      </li>
-      <li>
-        <button class="featured__item" data-filter=".porsche">
-          <img src="<?= bloginfo('template_url'); ?>/assets/images/logo1.png" alt="logo">
-        </button>
-      </li>
+
+      <?php
+      $posts = get_posts(array(
+        'numberposts' => 3,
+        'category_name' => 'featured_filters',
+        'order_by' => 'date',
+        'order' => 'ASC',
+        'post_type' => 'post',
+        'suppress_filters' => true,
+      ));
+
+      foreach ($posts as $key => $post) {
+        setup_postdata($post);
+      ?>
+        <li>
+          <button class="featured__item" data-filter=".<?= the_field('filter_type') ?>">
+            <img src="<?php the_post_thumbnail_url(); ?>" alt="logo">
+          </button>
+        </li>
+      <?php
+      }
+
+      wp_reset_postdata();
+      ?>
     </ul>
 
     <!-- FEATURED CONTENT -->
     <div class="featured__content grid">
+      <?php
+      $posts = get_posts(array(
+        'numberposts' => -1,
+        'category_name' => 'featured_cards',
+        'order_by' => 'date',
+        'order' => 'ASC',
+        'post_type' => 'post',
+        'suppress_filters' => true,
+      ));
 
-      <!-- FEATURED CARD -->
-      <article class="featured__card mix tesla">
-        <div class="shape shape__smaller"></div>
-        <h1 class="featured__title">Tesla</h1>
-        <h3 class="featured__subtitle">Model X</h3>
-        <img class="featured__img" src="<?= bloginfo('template_url'); ?>/assets/images/featured1.png" alt="featured">
-        <h3 class="featured__price">$98,900</h3>
-        <button class="button featured__button">
-          <i class="ri-shopping-bag-2-line"></i>
-        </button>
-      </article>
+      foreach ($posts as $key => $post) {
+        setup_postdata($post);
+      ?>
+        <!-- FEATURED CARD -->
+        <article class="featured__card mix <?= the_field('card_brand') ?>">
+          <div class="shape shape__smaller"></div>
+          <h1 class="featured__title">
+            <?php the_title(); ?>
+          </h1>
+          <h3 class="featured__subtitle">
+            <?php the_field('card_subtitle'); ?>
+          </h3>
+          <img class="featured__img" src="<?php the_post_thumbnail_url(); ?>" alt="featured">
+          <h3 class="featured__price">
+            <?php the_field('card_price'); ?>
+          </h3>
+          <button class="button featured__button">
+            <i class="ri-shopping-bag-2-line"></i>
+          </button>
+        </article>
+      <?php
+      }
 
-      <!-- FEATURED CARD -->
-      <article class="featured__card mix tesla">
-        <div class="shape shape__smaller"></div>
-        <h1 class="featured__title">Tesla</h1>
-        <h3 class="featured__subtitle">Model 3</h3>
-        <img class="featured__img" src="<?= bloginfo('template_url'); ?>/assets/images/featured2.png" alt="featured">
-        <h3 class="featured__price">$45,900</h3>
-        <button class="button featured__button">
-          <i class="ri-shopping-bag-2-line"></i>
-        </button>
-      </article>
-
-      <!-- FEATURED CARD -->
-      <article class="featured__card mix audi">
-        <div class="shape shape__smaller"></div>
-        <h1 class="featured__title">Audi</h1>
-        <h3 class="featured__subtitle">E-tron</h3>
-        <img class="featured__img" src="<?= bloginfo('template_url'); ?>/assets/images/featured3.png" alt="featured">
-        <h3 class="featured__price">$175,900</h3>
-        <button class="button featured__button">
-          <i class="ri-shopping-bag-2-line"></i>
-        </button>
-      </article>
-
-      <!-- FEATURED CARD -->
-      <article class="featured__card mix porsche">
-        <div class="shape shape__smaller"></div>
-        <h1 class="featured__title">Porsche</h1>
-        <h3 class="featured__subtitle">Boxster 987</h3>
-        <img class="featured__img" src="<?= bloginfo('template_url'); ?>/assets/images/featured4.png" alt="featured">
-        <h3 class="featured__price">$126,900</h3>
-        <button class="button featured__button">
-          <i class="ri-shopping-bag-2-line"></i>
-        </button>
-      </article>
-
-      <!-- FEATURED CARD -->
-      <article class="featured__card mix porsche">
-        <div class="shape shape__smaller"></div>
-        <h1 class="featured__title">Porsche</h1>
-        <h3 class="featured__subtitle">Panamera</h3>
-        <img class="featured__img" src="<?= bloginfo('template_url'); ?>/assets/images/featured5.png" alt="featured">
-        <h3 class="featured__price">$126,900</h3>
-        <button class="button featured__button">
-          <i class="ri-shopping-bag-2-line"></i>
-        </button>
-      </article>
+      wp_reset_postdata();
+      ?>
     </div>
   </div>
 </section>
