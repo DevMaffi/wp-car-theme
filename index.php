@@ -14,38 +14,50 @@ get_header();
 
     <!-- HOME DATA -->
     <div class="home__data">
-      <h1 class="home__title">Choose The Best Car</h1>
-      <h2 class="home__subtitle">Porsche Mission E</h2>
+      <h1 class="home__title">
+        <?php the_field('home_title'); ?>
+      </h1>
+      <h2 class="home__subtitle">
+        <?php the_field('home_subtitle'); ?>
+      </h2>
       <h3 class="home__elec">
-        <i class="ri-flashlight-fill"></i>
-        Electric car
+        <?php the_field('home_elec_icon'); ?>
+        <?php the_field('home_elec_text'); ?>
       </h3>
     </div>
-    <img class="home__img" src="<?= bloginfo('template_url'); ?>/assets/images/home.png" alt="🏡">
+    <img class="home__img" src="<?php the_field('home_img'); ?>" alt="🏡">
 
     <!-- HOME CAR -->
     <div class="home__car">
-      <div class="home__car-data">
-        <div class="home__car-icon">
-          <i class="ri-temp-cold-line"></i>
+      <?php
+      $posts = get_posts(array(
+        'numberposts' => 3,
+        'category_name' => 'car_data',
+        'order_by' => 'date',
+        'order' => 'ASC',
+        'post_type' => 'post',
+        'suppress_filters' => true,
+      ));
+
+      foreach ($posts as $post) {
+        setup_postdata($post);
+      ?>
+        <div class="home__car-data">
+          <div class="home__car-icon">
+            <?php the_field('car_data_icon'); ?>
+          </div>
+          <h2 class="home__car-number">
+            <?php the_field('car_data_number'); ?>
+          </h2>
+          <h3 class="home__car-name">
+            <?php the_field('car_data_text'); ?>
+          </h3>
         </div>
-        <h2 class="home__car-number">24°</h2>
-        <h3 class="home__car-name">TEMPERATURE</h3>
-      </div>
-      <div class="home__car-data">
-        <div class="home__car-icon">
-          <i class="ri-dashboard-3-line"></i>
-        </div>
-        <h2 class="home__car-number">873</h2>
-        <h3 class="home__car-name">MILEAGE</h3>
-      </div>
-      <div class="home__car-data">
-        <div class="home__car-icon">
-          <i class="ri-flashlight-fill"></i>
-        </div>
-        <h2 class="home__car-number">94%</h2>
-        <h3 class="home__car-name">BATTERY</h3>
-      </div>
+      <?php
+      }
+
+      wp_reset_postdata();
+      ?>
     </div>
     <a class="home__button" href="#about">START</a>
   </div>
