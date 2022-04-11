@@ -71,13 +71,15 @@ get_header();
 
     <!-- ABOUT GROUP -->
     <div class="about__group">
-      <img class="about__img" src="<?= bloginfo('template_url'); ?>/assets/images/about.png" alt="about">
+      <img class="about__img" src="<?php the_field('about_img'); ?>" alt="about">
 
       <!-- ABOUT CARD -->
       <div class="about__card">
-        <h3 class="about__card-title">2.500+</h3>
+        <h3 class="about__card-title">
+          <?php the_field('about_card_title'); ?>
+        </h3>
         <p class="about__card-description">
-          Supercharges placed along popular routes
+          <?php the_field('about_card_description'); ?>
         </p>
       </div>
     </div>
@@ -85,12 +87,10 @@ get_header();
     <!-- ABOUT DATA -->
     <div class="about__data">
       <h2 class="section__title about__title">
-        Machines With
-        <br>
-        Future Technology
+        <?php the_field('about_title'); ?>
       </h2>
       <p class="about__description">
-        See the future with high-performance electric cars produced by renowned brands. They feature futuristic builds and designs with new and innovative platforms that last a long time.
+        <?php the_field('about_description'); ?>
       </p>
       <a class="button" href="#">Know more</a>
     </div>
