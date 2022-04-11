@@ -100,9 +100,7 @@ get_header();
 <!-- POPULAR -->
 <section class="popular section" id="popular" data-blur-target>
   <h2 class="section__title">
-    Choose Your Electric Car
-    <br>
-    Of The Porsche Brand
+    <?php the_field('popular_title'); ?>
   </h2>
 
   <!-- POPULAR CONTAINER -->
@@ -110,146 +108,57 @@ get_header();
 
     <!-- SWIPER WRAPPER -->
     <div class="swiper-wrapper">
+      <?php
+      $posts = get_posts(array(
+        'numberposts' => -1,
+        'category_name' => 'popular',
+        'order_by' => 'date',
+        'order' => 'ASC',
+        'post_type' => 'post',
+        'suppress_filters' => true,
+      ));
 
-      <!-- POPULAR CARD -->
-      <article class="popular__card swiper-slide">
-        <div class="shape shape__smaller"></div>
-        <h1 class="popular__title">Porsche</h1>
-        <h3 class="popular__subtitle">Turbo S</h3>
-        <img class="popular__img" src="<?= bloginfo('template_url'); ?>/assets/images/popular1.png" alt="popular">
+      foreach ($posts as $post) {
+        setup_postdata($post);
+      ?>
+        <!-- POPULAR CARD -->
+        <article class="popular__card swiper-slide">
+          <div class="shape shape__smaller"></div>
+          <h1 class="popular__title">
+            <?php the_title(); ?>
+          </h1>
+          <h3 class="popular__subtitle">
+            <?php the_field('card_subtitle'); ?>
+          </h3>
+          <img class="popular__img" src="<?php the_post_thumbnail_url(); ?>" alt="popular">
 
-        <!-- POPULAR DATA -->
-        <div class="popular__data">
-          <div class="popular__data-group">
-            <i class="ri-dashboard-3-line"></i>
-            3.7 Sec
+          <!-- POPULAR DATA -->
+          <div class="popular__data">
+            <div class="popular__data-group">
+              <i class="ri-dashboard-3-line"></i>
+              <?php the_field('card_dash_spec'); ?>
+            </div>
+            <div class="popular__data-group">
+              <i class="ri-funds-box-line"></i>
+              <?php the_field('card_funds_spec'); ?>
+            </div>
+            <div class="popular__data-group">
+              <i class="ri-charging-pile-2-line"></i>
+              <?php the_field('card_charge_spec'); ?>
+            </div>
           </div>
-          <div class="popular__data-group">
-            <i class="ri-funds-box-line"></i>
-            356 Km/h
-          </div>
-          <div class="popular__data-group">
-            <i class="ri-charging-pile-2-line"></i>
-            Electric
-          </div>
-        </div>
-        <h3 class="popular__price">$175,900</h3>
-        <button class="button popular__button">
-          <i class="ri-shopping-bag-2-line"></i>
-        </button>
-      </article>
+          <h3 class="popular__price">
+            <?php the_field('card_price'); ?>
+          </h3>
+          <button class="button popular__button">
+            <i class="ri-shopping-bag-2-line"></i>
+          </button>
+        </article>
+      <?php
+      }
 
-      <!-- POPULAR CARD -->
-      <article class="popular__card swiper-slide">
-        <div class="shape shape__smaller"></div>
-        <h1 class="popular__title">Porsche</h1>
-        <h3 class="popular__subtitle">Taycan</h3>
-        <img class="popular__img" src="<?= bloginfo('template_url'); ?>/assets/images/popular2.png" alt="popular">
-
-        <!-- POPULAR DATA -->
-        <div class="popular__data">
-          <div class="popular__data-group">
-            <i class="ri-dashboard-3-line"></i>
-            3.7 Sec
-          </div>
-          <div class="popular__data-group">
-            <i class="ri-funds-box-line"></i>
-            356 Km/h
-          </div>
-          <div class="popular__data-group">
-            <i class="ri-charging-pile-2-line"></i>
-            Electric
-          </div>
-        </div>
-        <h3 class="popular__price">$114,900</h3>
-        <button class="button popular__button">
-          <i class="ri-shopping-bag-2-line"></i>
-        </button>
-      </article>
-
-      <!-- POPULAR CARD -->
-      <article class="popular__card swiper-slide">
-        <div class="shape shape__smaller"></div>
-        <h1 class="popular__title">Porsche</h1>
-        <h3 class="popular__subtitle">Turbo S Cross</h3>
-        <img class="popular__img" src="<?= bloginfo('template_url'); ?>/assets/images/popular3.png" alt="popular">
-
-        <!-- POPULAR DATA -->
-        <div class="popular__data">
-          <div class="popular__data-group">
-            <i class="ri-dashboard-3-line"></i>
-            3.7 Sec
-          </div>
-          <div class="popular__data-group">
-            <i class="ri-funds-box-line"></i>
-            356 Km/h
-          </div>
-          <div class="popular__data-group">
-            <i class="ri-charging-pile-2-line"></i>
-            Electric
-          </div>
-        </div>
-        <h3 class="popular__price">$150,900</h3>
-        <button class="button popular__button">
-          <i class="ri-shopping-bag-2-line"></i>
-        </button>
-      </article>
-
-      <!-- POPULAR CARD -->
-      <article class="popular__card swiper-slide">
-        <div class="shape shape__smaller"></div>
-        <h1 class="popular__title">Porsche</h1>
-        <h3 class="popular__subtitle">Boxster 718</h3>
-        <img class="popular__img" src="<?= bloginfo('template_url'); ?>/assets/images/popular4.png" alt="popular">
-
-        <!-- POPULAR DATA -->
-        <div class="popular__data">
-          <div class="popular__data-group">
-            <i class="ri-dashboard-3-line"></i>
-            3.7 Sec
-          </div>
-          <div class="popular__data-group">
-            <i class="ri-funds-box-line"></i>
-            356 Km/h
-          </div>
-          <div class="popular__data-group">
-            <i class="ri-charging-pile-2-line"></i>
-            Electric
-          </div>
-        </div>
-        <h3 class="popular__price">$125,900</h3>
-        <button class="button popular__button">
-          <i class="ri-shopping-bag-2-line"></i>
-        </button>
-      </article>
-
-      <!-- POPULAR CARD -->
-      <article class="popular__card swiper-slide">
-        <div class="shape shape__smaller"></div>
-        <h1 class="popular__title">Porsche</h1>
-        <h3 class="popular__subtitle">Cayman</h3>
-        <img class="popular__img" src="<?= bloginfo('template_url'); ?>/assets/images/popular5.png" alt="popular">
-
-        <!-- POPULAR DATA -->
-        <div class="popular__data">
-          <div class="popular__data-group">
-            <i class="ri-dashboard-3-line"></i>
-            3.7 Sec
-          </div>
-          <div class="popular__data-group">
-            <i class="ri-funds-box-line"></i>
-            356 Km/h
-          </div>
-          <div class="popular__data-group">
-            <i class="ri-charging-pile-2-line"></i>
-            Electric
-          </div>
-        </div>
-        <h3 class="popular__price">$128,900</h3>
-        <button class="button popular__button">
-          <i class="ri-shopping-bag-2-line"></i>
-        </button>
-      </article>
+      wp_reset_postdata();
+      ?>
     </div>
     <div class="swiper-pagination"></div>
   </div>
