@@ -93,7 +93,9 @@
       </ul>
     </div>
   </div>
-  <span class="footer__copy">© 2022 Elecar. All rights reserved</span>
+  <span class="footer__copy">
+    <?php the_field('footer_copy'); ?>
+  </span>
 </footer>
 </main>
 
