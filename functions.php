@@ -27,3 +27,18 @@ function car_scripts()
 // Config posts
 
 add_theme_support('post-thumbnails');
+
+// Handle menus
+
+add_theme_support('menus');
+
+add_filter('nav_menu_link_attributes', 'filter_menu_links', 10, 3);
+
+function filter_menu_links($atts, $item, $args)
+{
+  if ($args->menu === 'Company menu' || $args->menu === 'Information menu') {
+    $atts['class'] = 'footer__link';
+  }
+
+  return $atts;
+}
