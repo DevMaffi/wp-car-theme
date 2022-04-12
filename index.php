@@ -298,16 +298,14 @@ get_header();
     <!-- OFFER DATA -->
     <div class="offer__data">
       <h2 class="section__title offer__title">
-        Do You Want To Receive
-        <br />
-        Special Offers?
+        <?php the_field('offer_title'); ?>
       </h2>
       <p class="offer__description">
-        Be the first to receive all the information about our products and new cars by email by subscribing to our mailing list.
+        <?php the_field('offer_description'); ?>
       </p>
       <a class="button" href="#">Subscribe Now</a>
     </div>
-    <img class="offer__img" src="<?= bloginfo('template_url'); ?>/assets/images/offer.png" alt="offer">
+    <img class="offer__img" src="<?php the_field('offer_img'); ?>" alt="offer">
   </div>
 </section>
 
