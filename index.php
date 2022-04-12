@@ -189,7 +189,7 @@ get_header();
         setup_postdata($post);
       ?>
         <!-- FEATURES CARD -->
-        <div class="<?= 'features__card features__card-' . ($key + 1) ?>">
+        <div class="features__card features__card-<?= ($key + 1) ?>">
           <h3 class="features__card-title">
             <?php the_field('card_title'); ?>
           </h3>
