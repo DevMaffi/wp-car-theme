@@ -316,36 +316,28 @@ get_header();
 
   <!-- LOGOS CONTAINER -->
   <div class="logos__container container grid">
+    <?php
+    $posts = get_posts(array(
+      'numberposts' => 6,
+      'category_name' => 'logos',
+      'order_by' => 'date',
+      'order' => 'ASC',
+      'post_type' => 'post',
+      'suppress_filters' => true,
+    ));
 
-    <!-- LOGOS CONTENT -->
-    <div class="logos__content">
-      <img class="logos__img" src="<?= bloginfo('template_url'); ?>/assets/images/logo1.png" alt="logo">
-    </div>
+    foreach ($posts as $key => $post) {
+      setup_postdata($post);
+    ?>
+      <!-- LOGOS CONTENT -->
+      <div class="logos__content">
+        <img class="logos__img" src="<?php the_post_thumbnail_url(); ?>" alt="logo">
+      </div>
+    <?php
+    }
 
-    <!-- LOGOS CONTENT -->
-    <div class="logos__content">
-      <img class="logos__img" src="<?= bloginfo('template_url'); ?>/assets/images/logo2.png" alt="logo">
-    </div>
-
-    <!-- LOGOS CONTENT -->
-    <div class="logos__content">
-      <img class="logos__img" src="<?= bloginfo('template_url'); ?>/assets/images/logo3.png" alt="logo">
-    </div>
-
-    <!-- LOGOS CONTENT -->
-    <div class="logos__content">
-      <img class="logos__img" src="<?= bloginfo('template_url'); ?>/assets/images/logo4.png" alt="logo">
-    </div>
-
-    <!-- LOGOS CONTENT -->
-    <div class="logos__content">
-      <img class="logos__img" src="<?= bloginfo('template_url'); ?>/assets/images/logo5.png" alt="logo">
-    </div>
-
-    <!-- LOGOS CONTENT -->
-    <div class="logos__content">
-      <img class="logos__img" src="<?= bloginfo('template_url'); ?>/assets/images/logo6.png" alt="logo">
-    </div>
+    wp_reset_postdata();
+    ?>
   </div>
 </section>
 
