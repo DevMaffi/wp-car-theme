@@ -209,7 +209,9 @@ get_header();
 
 <!-- FEATURED -->
 <section class="featured section" id="featured" data-blur-target>
-  <h2 class="section__title">Featured Luxury Cars</h2>
+  <h2 class="section__title">
+    <?php the_field('featured_title'); ?>
+  </h2>
 
   <!-- FEATURED CONTAINER -->
   <div class="featured__container container">
